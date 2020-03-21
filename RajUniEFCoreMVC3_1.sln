@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RajUniEFCoreMVC3_1", "RajUniEFCoreMVC3_1.csproj", "{CA588651-678F-4D4F-93A3-C7A6D2897A79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5163F58-0F15-476C-BF46-84321425DAB4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA588651-678F-4D4F-93A3-C7A6D2897A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA588651-678F-4D4F-93A3-C7A6D2897A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA588651-678F-4D4F-93A3-C7A6D2897A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA588651-678F-4D4F-93A3-C7A6D2897A79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67012D37-3BF0-46CB-ABAD-2C84A6230492}
+	EndGlobalSection
+EndGlobal
