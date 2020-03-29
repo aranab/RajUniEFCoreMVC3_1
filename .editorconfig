@@ -20,3 +20,9 @@ dotnet_diagnostic.CA1303.severity = none
 
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+
+# CA1307: Specify StringComparison
+dotnet_diagnostic.CA1307.severity = none
+
+dotnet_code_quality.ca1710.api_surface = private, internal
+dotnet_code_quality.ca1000.api_surface = private, internal
