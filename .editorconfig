@@ -29,3 +29,6 @@ dotnet_code_quality.ca1000.api_surface = private, internal
 
 # CA2227: Collection properties should be read only
 dotnet_diagnostic.CA2227.severity = none
+
+# CA1819: Properties should not return arrays
+dotnet_diagnostic.CA1819.severity = none
