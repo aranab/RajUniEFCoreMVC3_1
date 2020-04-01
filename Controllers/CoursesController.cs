@@ -178,9 +178,22 @@ namespace RajUniEFCoreMVC3_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        // GET: Courses/UpdateCourseCredits
+        public IActionResult UpdateCourseCredits()
         {
-            return _context.Courses.Any(e => e.CourseID == id);
+            return View();
+        }
+
+        // POST: Courses/UpdateCourseCredits/5
+        [HttpPost]
+        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewData["RowsAffected"] = await _context.Database.ExecuteSqlRawAsync("UPDATE Course SET Credits = Credits * {0}", parameters: multiplier);
+            }
+
+            return View();
         }
     }
 }

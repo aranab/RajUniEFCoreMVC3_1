@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RajUniEFCoreMVC3_1.Data;
 using RajUniEFCoreMVC3_1.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RajUniEFCoreMVC3_1.Controllers
 {
@@ -21,14 +19,14 @@ namespace RajUniEFCoreMVC3_1.Controllers
 
         // GET: Students
         public async Task<IActionResult> Index(
-            string sortOrder,
-            string currentFilter,
-            string searchString,
+            string sortOrder, 
+            string currentFilter, 
+            string searchString, 
             int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "LastName_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "EnrollmentDate" ? "EnrollmentDate_desc" : "EnrollmentDate";
 
             if (searchString != null)
             {
@@ -44,25 +42,31 @@ namespace RajUniEFCoreMVC3_1.Controllers
             var students = from s in _context.Students
                            select s;
 
-            if ( !string.IsNullOrWhiteSpace(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
+                students = students.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstMidName.Contains(searchString));
             }
 
-            switch (sortOrder)
+            if (string.IsNullOrEmpty(sortOrder))
             {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:
-                    students = students.OrderBy(s => s.LastName);
-                    break;
+                sortOrder = "LastName";
+            }
+
+            bool descending = false;
+            if (sortOrder.EndsWith("_desc"))
+            {
+                sortOrder = sortOrder[0..^5];
+                descending = true;
+            }
+
+            if (descending)
+            {
+                students = students.OrderByDescending(e => EF.Property<object>(e, sortOrder));
+            }
+            else
+            {
+                students = students.OrderBy(e => EF.Property<object>(e, sortOrder));
             }
 
             int pageSize = 3;
@@ -153,7 +157,7 @@ namespace RajUniEFCoreMVC3_1.Controllers
             var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
 
             if (await TryUpdateModelAsync(
-                studentToUpdate, "", 
+                studentToUpdate, "",
                 s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
             {
                 try
@@ -170,7 +174,7 @@ namespace RajUniEFCoreMVC3_1.Controllers
                 }
             }
 
-            return View(studentToUpdate);            
+            return View(studentToUpdate);
         }
 
         // GET: Students/Delete/5
